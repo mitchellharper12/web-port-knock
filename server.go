@@ -1,7 +1,6 @@
 package main
 
 import (
-    "fmt"
     "strings"
     "log"
     "os"
@@ -12,7 +11,6 @@ import (
 
 func handler(w http.ResponseWriter, r *http.Request) {
     remote_host := strings.Split(r.RemoteAddr, ":")[0]
-    fmt.Print(remote_host)
     service_port := os.Getenv("SERVICE_PORT")
     if net.ParseIP(remote_host) == nil {
         http.Error(w, "bad remote", http.StatusForbidden)
