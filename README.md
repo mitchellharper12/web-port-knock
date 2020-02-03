@@ -14,10 +14,10 @@ more work than I want to put in. Also many other people in the history of networ
 had this exact same desire.
 
 Port knocking is one way people used to do this, but that requires an understanding of how network
-protocols work and I'd rather not have to explain to each one of my friends what a TCP port in the
+protocols work and I'd rather not have to explain TCP to each one of my friends in the
 Discord before they can get on my server. Port knocking was basically an implementation of
 authorization based on "something you know," and a URL with some entropy is a thing I can
-give my friends that can serve the same purpose as a sequence of ports to connect to.
+give my friends that can serve the same purpose as a sequence of ports.
 
 I didn't find anything else that really satisfied this use case...there's a node package out
 there but it seemed like overkill and maybe only for web traffic? Also I want to keep the
@@ -27,8 +27,8 @@ to be completely open to the internet. So I made one myself.
 ## What this service does not do
 
 Logging, periodic removal of whitelisted IP addresses, keep you from shooting yourself in the foot,
-HTTPS, multiple authentication keys. It's barebones and works for my specific threat model. Be guaranteed
-to work on anything other than a Linux distro similar to Ubuntu. IPv6 support.
+HTTPS. Multiple authentication keys. Be guaranteed to work on anything other than a Linux distro similar
+to Ubuntu. IPv6 support. It's barebones and works for my specific threat model.
 
 The main [server.go](./server.go) basicaly listens on a port you define in an environment variable,
 waits for a GET request to a route you define in an environment variable, and runs a shell command
@@ -48,7 +48,7 @@ Port knocking is done in the clear, so not having TLS doesn't seem like a grave 
 
 You have ufw installed and enabled. If you want you can change the go file to use straight iptables but that's
 up to you to implement if you want. Also the user the server executes as must be able to run ufw with passwordless
-sudo. At least that's how I did it. I tried giving the binary CAP\_NET\_ADMIN but that doesn't let you mess with
+sudo. At least that's how I did it. I tried giving the binary `CAP_NET_ADMIN` but that doesn't let you mess with
 ufw rules. Maybe it works with iptables if you do it that way. Might test that and update it later. If you think
 it's a bad idea to give a binary listening on the open internet the ability to execute ufw with passwordless sudo
 drop an issue.
@@ -63,7 +63,8 @@ environment variables to the runtime:
    cause a command to be run to add a firewall rule. Probably should be hard to guess.
  * `LOCAL_SERVICE_ADDRESS`: The IP address the service you are protecting is running on. Specifically,
    this is what will be added to the "to" directive when a ufw rule is added.
- * `SERVICE_PORT`: The port the service you are protecting is running on.
+ * `SERVICE_PORT`: The port the service you are protecting is running on. You also might be forwarding
+    a port in if you are behind a router.
 
 
 Then give your friends the HTTP URL that corresponds to your WAN IP address, HTTP listening port, and route.
