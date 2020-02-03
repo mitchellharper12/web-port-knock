@@ -56,17 +56,17 @@ drop an issue.
 Build the server with `go build server.go`. Execute the server, providing the following 4
 environment variables to the runtime:
 
- * `LISTEN_SPEC`: An IP address colon port string, e.g. "127.0.0.1:8080", "10.0.0.2:1111". This is the
+ * `LISTEN_SPEC` An IP address colon port string, e.g. "127.0.0.1:8080", "10.0.0.2:1111". This is the
    what the go HTTP server will bind to. The thing open to the internet. If you're behind a router you'll
    probably wanna forward a port in.
  * `HANDLER_ROUTE`: A string containing at least 12 characters. The HTTP path that when browsed to will
    cause a command to be run to add a firewall rule. Probably should be hard to guess.
- * `LOCAL_SERVICE_ADDRESS:` The IP address the service you are protecting is running on. Specifically,
+ * `LOCAL_SERVICE_ADDRESS`: The IP address the service you are protecting is running on. Specifically,
    this is what will be added to the "to" directive when a ufw rule is added.
  * `SERVICE_PORT`: The port the service you are protecting is running on.
 
 
-Then give your friends the HTTP url that corresponds to your WAN IP address, HTTP listening port, and route.
+Then give your friends the HTTP URL that corresponds to your WAN IP address, HTTP listening port, and route.
 
 ## License:
 
