@@ -30,8 +30,8 @@ Logging, periodic removal of whitelisted IP addresses, keep you from shooting yo
 HTTPS, multiple authentication keys. It's barebones and works for my specific threat model. Be guaranteed
 to work on anything other than a Linux distro similar to Ubuntu. IPv6 support.
 
-The main [./server.go] basicaly listens on a port you define in an environment variable,
-waits for a GET request to a route you define in an environment variable, and run a shell command
+The main [server.go](./server.go) basicaly listens on a port you define in an environment variable,
+waits for a GET request to a route you define in an environment variable, and runs a shell command
 hardcoded in the file. Also, in my estimation, you probably don't want any of that processing done
 by the service listening on the open internet. You might want HTTP logging and I might add that at
 some point, but you could also use tcpdump to log connections too and not lose out on any data.
@@ -67,3 +67,7 @@ environment variables to the runtime:
 
 
 Then give your friends the HTTP url that corresponds to your WAN IP address, HTTP listening port, and route.
+
+## License:
+
+Dual licensed under the MIT license and the AntiLicense, see [LICENSE.md](./LICENSE.md).
